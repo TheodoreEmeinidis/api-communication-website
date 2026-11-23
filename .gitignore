@@ -1,0 +1,19 @@
+# Local editor and operating system files
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local logs, credentials, and temporary tooling
+*.log
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+tmp/
+
+# Cloudflare local state and development secrets
+.wrangler/
+.dev.vars
+.dev.vars.*

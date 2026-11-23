@@ -1,0 +1,3 @@
+Product photos and TUR logo: supplied by the user; TUR branding and copyright are preserved.
+Lucide icons: ISC license, downloaded from the official lucide-icons/lucide repository. Full upstream license: assets/icons/LICENSE.txt.
+21st.dev Animated Beam and Feature Tab Switcher were visual references only. No component source was copied.

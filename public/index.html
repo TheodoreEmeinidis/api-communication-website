@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore how Cellit and CellAirOne exchange settings, measurements, and complete results with an API server.">
+  <meta name="color-scheme" content="light">
+  <title>Cellit &amp; CellAirOne | API Communication</title>
+  <link rel="icon" href="./assets/brand/tur.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./data.js" defer></script>
+  <script src="./charts.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="brand" href="./index.html" aria-label="TUR API communication home"><img src="./assets/brand/tur.png" alt="TUR" width="70" height="34"><span>Device connectivity</span></a>
+    <nav aria-label="Main navigation"><a href="#demo">Communication demo</a><a href="#devices">Devices</a><a class="protocol-link" href="./protocol.html"><img class="icon" src="./assets/icons/book-open.svg" alt="">API protocol</a></nav>
+  </header>
+  <div class="simulation-bar"><span class="simulation-mark" aria-hidden="true"></span>Illustrative simulation. No live device connected.</div>
+  <main id="main">
+    <section class="overview section-inner" aria-labelledby="overview-title">
+      <div class="overview-heading"><div><p class="eyebrow">Connected devices. Clear communication.</p><h1 id="overview-title">Cellit &amp; CellAirOne</h1><p class="title-caption">API communication</p></div><p class="intro-copy">Settings go to the device. <br>Measurements and results come back. <br><strong>One connected workflow.</strong></p></div>
+      <div class="product-gallery">
+        <article class="product-item"><div class="product-image"><img src="./assets/products/cellit.jpg" alt="Black Cellit device" width="11153" height="7011" fetchpriority="high"></div><div class="product-caption"><div><h2>Cellit</h2><p>IHHT therapy, live values, complete results.</p></div><button class="text-button" type="button" data-explore="cellit">Explore Cellit</button></div></article>
+        <article class="product-item"><div class="product-image"><img src="./assets/products/cellairone.jpg" alt="White CellAirOne medical device" width="7360" height="7360" decoding="async"></div><div class="product-caption"><div><h2>CellAirOne</h2><p>Six activities. Activity-specific settings and results.</p></div><button class="text-button" type="button" data-explore="cellairone">Explore CellAirOne</button></div></article>
+      </div>
+      <div class="overview-bottom"><p>Developed and verified through an API simulation environment.</p><a class="button primary" href="#demo"><img class="icon" src="./assets/icons/play.svg" alt="">Start demo</a></div>
+    </section>
+
+    <section class="section-band" id="demo" aria-labelledby="demo-title">
+      <div class="section-inner">
+        <div class="section-heading"><div><p class="eyebrow">The communication journey</p><h2 id="demo-title">One connection. From settings to results.</h2></div><div class="device-switch" role="group" aria-label="Demo device"><button type="button" data-device="cellit" aria-pressed="false">Cellit</button><button type="button" data-device="cellairone" aria-pressed="true">CellAirOne</button></div></div>
+        <div class="demo-options"><label id="demo-activity-field">Activity<select id="demo-activity" aria-label="Demo activity"></select></label><div class="scenario-switch" role="group" aria-label="Communication scenario"><button type="button" data-scenario="normal" aria-pressed="true">Normal flow</button><button type="button" data-scenario="rejected" aria-pressed="false">Settings rejected</button></div></div>
+        <ol class="stepper" id="stepper" aria-label="Communication stages"></ol>
+        <div class="stage-heading"><div><p class="eyebrow" id="step-count">Step 1 of 7</p><h3 id="stage-title" aria-live="polite">Connect and identify</h3></div><span class="direction-label" id="stage-direction">Device to server</span></div>
+        <div class="communication-diagram" id="communication-diagram" aria-label="Dashboard communicates with the API server. Device communicates with the API server.">
+          <article class="system-node" id="node-dashboard"><img class="node-icon" src="./assets/icons/monitor.svg" alt=""><p class="node-role">Clinic operator</p><h4>Browser dashboard</h4><p>Selects settings. <br>Views status and results.</p><div class="node-footer"><span>Operator view</span><strong id="operator-state">Waiting</strong></div></article>
+          <div class="connector" id="connector-dashboard"><span class="connector-label"></span><svg viewBox="0 0 160 64" aria-hidden="true"><defs><marker id="arrow-dashboard" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="currentColor"></path></marker></defs><path class="connector-track" d="M8 32H152"></path><path class="connector-beam" d="M8 32H152" marker-end="url(#arrow-dashboard)"></path></svg></div>
+          <article class="system-node" id="node-server"><img class="node-icon" src="./assets/icons/server.svg" alt=""><p class="node-role">Communication hub</p><h4>API server</h4><p>Routes settings. <br>Receives device information.</p><div class="node-footer"><span>Message</span><strong id="server-state">Boot report</strong></div></article>
+          <div class="connector" id="connector-device"><span class="connector-label"></span><svg viewBox="0 0 160 64" aria-hidden="true"><defs><marker id="arrow-device" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="currentColor"></path></marker></defs><path class="connector-track" d="M8 32H152"></path><path class="connector-beam" d="M152 32H8" marker-end="url(#arrow-device)"></path></svg></div>
+          <article class="system-node" id="node-device"><div class="node-product"><img id="diagram-product" src="./assets/products/cellairone.jpg" alt="White CellAirOne medical device" width="70" height="70"></div><p class="node-role">Runs the activity locally</p><h4 id="diagram-device-name">CellAirOne</h4><p>Validates settings. <br>Reports measurements.</p><div class="node-footer"><span>Device status</span><strong class="status good" id="device-stage-status">AVAILABLE</strong></div></article>
+        </div>
+        <div class="stage-story"><p id="stage-description"></p><div class="rejection-message" id="rejection-message" role="status" hidden><strong>Settings not approved</strong><span>Example setting: value not accepted by the device.</span><button class="button secondary" type="button" id="resend-settings">Adjust &amp; resend</button></div><div class="completion-note" id="completion-note" hidden><img class="icon" src="./assets/icons/file-check.svg" alt=""><p><strong>One complete JSON message.</strong> The receiving server can process and display the full dataset. The documented device workflow does not retain session information locally after successful transfer.</p></div></div>
+        <div class="demo-controls"><div class="transport-controls"><button class="button secondary" type="button" id="previous-step"><img class="icon" src="./assets/icons/skip-back.svg" alt="">Previous</button><button class="button primary" type="button" id="play-demo"><img class="icon" id="play-icon" src="./assets/icons/play.svg" alt=""><span id="play-label">Play</span></button><button class="button secondary" type="button" id="next-step">Next<img class="icon" src="./assets/icons/skip-forward.svg" alt=""></button><button class="icon-button" type="button" id="restart-demo" aria-label="Restart demo" title="Restart demo"><img class="icon" src="./assets/icons/rotate-ccw.svg" alt=""></button></div><span class="sample-label">Example workflow</span></div>
+        <details class="disclosure"><summary>Technical details and example JSON</summary><p>The dashboard exchanges information with the server through HTTP REST. Each device maintains one bidirectional WebSocket connection to the server. No automatic application-level ACK is shown or assumed.</p><div class="code-toolbar"><span id="demo-json-label">Boot_report</span><button class="copy-button" type="button" data-copy="demo-json" aria-label="Copy stage JSON"><img class="icon" src="./assets/icons/copy.svg" alt=""><span>Copy</span></button></div><pre><code id="demo-json"></code></pre><p class="technical-note">Sanitized, illustrative values. Settings and measurement examples are not clinical recommendations.</p></details>
+      </div>
+    </section>
+
+    <section class="section-inner device-section" id="devices" aria-labelledby="devices-title">
+      <div class="section-heading"><div><p class="eyebrow">Two products, one communication approach</p><h2 id="devices-title">Different activities. The right information.</h2></div><div class="device-switch" role="group" aria-label="Comparison device"><button type="button" data-device="cellit" aria-pressed="false">Cellit</button><button type="button" data-device="cellairone" aria-pressed="true">CellAirOne</button></div></div>
+      <div class="activity-tabs" id="activity-tabs" role="tablist" aria-label="CellAirOne activities"></div>
+      <div class="comparison-layout" id="comparison-panel" role="tabpanel" aria-label="Selected activity">
+        <div class="comparison-product"><img id="comparison-image" src="./assets/products/cellairone.jpg" alt="White CellAirOne medical device" width="7360" height="7360" loading="lazy"><div><p class="eyebrow" id="comparison-device">CellAirOne</p><h3 id="comparison-name">Therapy</h3><p id="comparison-result"></p></div></div>
+        <div class="exchange-columns"><section><h3><img class="icon" src="./assets/icons/arrow-right-left.svg" alt="">Settings sent</h3><dl id="settings-list"></dl></section><section><h3><img class="icon" src="./assets/icons/file-check.svg" alt="">Information returned</h3><ul class="returned-list" id="returned-list"></ul><div class="result-list" id="result-list"></div></section></div>
+      </div>
+      <div class="chart-heading"><h3 id="comparison-chart-title">Illustrative therapy values</h3><div class="chart-legend" id="comparison-legend"></div></div>
+      <div class="chart-frame"><canvas id="comparison-chart" role="img" aria-label="Illustrative activity chart">Illustrative sample values are listed below.</canvas></div>
+      <div class="measurement-strip" id="comparison-values"></div><p class="technical-note">Illustrative sample data. No live clinical measurements.</p>
+    </section>
+
+    <section class="section-band" id="operator" aria-labelledby="operator-title">
+      <div class="section-inner"><div class="section-heading"><div><p class="eyebrow">What the operator sees</p><h2 id="operator-title">Device information, in one place.</h2></div><span class="sample-label">Illustrative operator view</span></div>
+        <div class="operator-console"><aside class="fleet"><div class="console-heading"><h3>Example devices</h3><span>2 devices</span></div><button class="fleet-row" type="button" data-device="cellit" aria-pressed="false"><strong>Cellit</strong><span>DEMO-CELLIT-001</span><span class="fleet-statuses"><span class="status good">GOOD</span><span class="status muted">AVAILABLE</span></span></button><button class="fleet-row" type="button" data-device="cellairone" aria-pressed="true"><strong>CellAirOne</strong><span>DEMO-CAO-001</span><span class="fleet-statuses"><span class="status good">GOOD</span><span class="status blue">RUNNING</span></span></button><div class="fleet-note"><p>Connection status</p><strong>GOOD / PROBLEM / OFFLINE</strong><p>Device status</p><strong>AVAILABLE / RESERVED / RUNNING / COMPLETED</strong></div></aside><div class="console-content"><div class="console-heading"><div><p class="eyebrow" id="console-activity">Therapy</p><h3 id="console-device">CellAirOne</h3></div><span class="status blue">EXAMPLE SESSION</span></div><div class="console-setting-summary" id="console-settings"></div><div class="chart-heading"><h4>Example measurements</h4><div class="chart-legend" id="console-legend"></div></div><div class="chart-frame compact"><canvas id="console-chart" role="img" aria-label="Illustrative operator chart">Illustrative sample measurements.</canvas></div><div class="measurement-strip" id="console-values"></div><details class="disclosure"><summary>Example completed result</summary><p id="console-result"></p><p><strong>Transfer:</strong> complete activity data in one JSON message.</p></details></div></div>
+        <details class="disclosure"><summary>Connection status interpretation</summary><p>Using server receipt time: GOOD under 5 seconds; PROBLEM from 5 to under 10 seconds; OFFLINE at 10 seconds or more. A new Connection Ping or recognized activity update refreshes the connection status. This is separate from the activity's running or completion state.</p></details>
+      </div>
+    </section>
+
+    <section class="section-inner outcomes" aria-labelledby="outcomes-title"><p class="eyebrow">Verified through the API simulator</p><h2 id="outcomes-title">The exchange, from beginning to end.</h2><div class="outcome-grid"><div><img class="icon" src="./assets/icons/check-circle.svg" alt="">Connect and identify</div><div><img class="icon" src="./assets/icons/check-circle.svg" alt="">Receive connection and status updates</div><div><img class="icon" src="./assets/icons/check-circle.svg" alt="">Deliver settings to the selected device</div><div><img class="icon" src="./assets/icons/check-circle.svg" alt="">Receive acceptance or rejection</div><div><img class="icon" src="./assets/icons/check-circle.svg" alt="">Receive and display live values</div><div><img class="icon" src="./assets/icons/check-circle.svg" alt="">Receive the complete dataset</div></div><div class="outcome-bottom"><p>The simulator reproduced the customer-style communication workflow to verify the exchange before production CRM integration.</p><a class="button primary" href="./protocol.html"><img class="icon" src="./assets/icons/book-open.svg" alt="">Client integration protocol</a></div></section>
+  </main>
+  <footer class="site-footer"><span>&copy; TUR. All rights reserved.</span><span>Cellit &amp; CellAirOne API communication</span><a href="./protocol.html">API protocol</a></footer>
+  <noscript><p class="noscript">This presentation uses local JavaScript for the guided demonstration. The product overview and protocol introduction remain available.</p></noscript>
+</body>
+</html>
